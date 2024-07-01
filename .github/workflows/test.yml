@@ -16,7 +16,9 @@ jobs:
           run: rm -f note.txt main.note.txt
     
         - name: Switch to main branch
-          run: git checkout main
+          run: |
+            git fetch origin main
+            git checkout main
     
         - name: Create main.note.txt with text 'MAIN TEST'
           run: echo 'MAIN TEST' > main.note.txt
