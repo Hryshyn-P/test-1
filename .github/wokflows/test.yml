@@ -22,7 +22,10 @@ jobs:
           run: echo 'MAIN TEST' > main.note.txt
     
         - name: Switch back to dev branch
-          run: git checkout dev
+        run: |
+        git fetch origin main
+        git checkout main
+
     
         - name: Create note.txt with text 'TEST'
           run: echo 'TEST' > note.txt
