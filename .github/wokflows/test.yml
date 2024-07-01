@@ -12,21 +12,21 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Delete note.txt and main.note.txt if exist
         run: rm -f note.txt main.note.txt
 
       - name: Switch to main branch
-      run: |
-        git fetch origin main
-        git checkout main
+        run: |
+          git fetch origin main
+          git checkout main
 
       - name: Create main.note.txt with text 'MAIN TEST'
         run: echo 'MAIN TEST' > main.note.txt
 
       - name: Upload main.note.txt as artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: main-note
           path: main.note.txt
@@ -38,7 +38,7 @@ jobs:
         run: echo 'TEST' > note.txt
 
       - name: Download main.note.txt artifact
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
           name: main-note
           path: .
