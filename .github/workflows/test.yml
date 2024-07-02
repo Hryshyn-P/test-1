@@ -72,5 +72,5 @@ jobs:
         run: echo "The script continues..."
 
       - name: Continue if false
-        if: ${{ env.V == 'false' }}
+        if: failure() && ${{ env.V == 'false' }}
         run: echo "The script continues..."
