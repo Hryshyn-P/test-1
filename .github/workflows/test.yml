@@ -58,8 +58,8 @@ jobs:
         id: command_with_exit_1
         run: |
           set +e
-          out=$(exit 1)
-          echo $out
+          exit 1
+
           
       - name: Handle exit 1
         if: steps.command_with_exit_1.outcome == 'failure'
