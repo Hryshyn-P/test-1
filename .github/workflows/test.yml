@@ -54,18 +54,18 @@ jobs:
       - name: Clean Up
         run: rm -f note.txt main.note.txt
 
-      - name: Run command and check for pattern
-        id: check_pattern
+      - name: Run command with exit 1
+        id: command_with_exit_1
         run: |
           set +e
           exit 1
-          if [ $? -eq 1 ]; then
-            echo "crash=true" >> $GITHUB_ENV
-          else
-            echo "crash=false" >> $GITHUB_ENV
-          fi
-        continue-on-error: true
+
+      - name: Handle exit 1
+        if: steps.command_with_exit_1.outcome == 'failure'
+        run: |
+          echo "Command exited with code 1."
+          echo "crash=true" >> $GITHUB_ENV
 
       - name: Continue if not crashed
-        if: env.crash == 'false'
-        run: echo "The script continues...
+        if: env.crash != 'true'
+        run: echo "The script continues..."
