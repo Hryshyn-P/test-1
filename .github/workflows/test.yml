@@ -59,7 +59,7 @@ jobs:
         run: |
           set +e
           text="hello world"
-          echo "res=$(echo "$text" | grep -q "ld")" >> $GITHUB_ENV
+          echo "res=$(echo "$text" | grep -q "ld" || "true")" >> $GITHUB_ENV
 
       - name: Handle exit 1
         run: |
