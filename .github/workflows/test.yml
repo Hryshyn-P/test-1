@@ -54,16 +54,18 @@ jobs:
       - name: Clean Up
         run: rm -f note.txt main.note.txt
 
-      - name: Check PR description for breaking change
+      - name: Run command and check for pattern
+        id: check_pattern
         run: |
           set +e
           exit 1
           if [ $? -eq 1 ]; then
-           echo "crash=true" >> $GITHUB_ENV
+            echo "crash=true" >> $GITHUB_ENV
           else
-           echo "crash=false" >> $GITHUB_ENV
+            echo "crash=false" >> $GITHUB_ENV
           fi
+        continue-on-error: true
 
       - name: Continue if not crashed
         if: env.crash == 'false'
-        run: echo "The script continues..."
+        run: echo "The script continues...
