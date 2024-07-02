@@ -64,7 +64,7 @@ jobs:
 
       - name: Handle exit 1
         run: |
-          echo env.res
+          echo ${{ env.res }}
 
       - name: Continue if not crashed
         run: echo "The script continues..."
