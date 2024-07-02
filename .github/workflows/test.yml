@@ -51,8 +51,8 @@ jobs:
     #         echo "The files are different"
     #       fi
 
-    # - name: Clean Up
-    #   run: rm -f note.txt main.note.txt
+      - name: Exit 1
+        run: exit 1
 
       - name: Run command with exit 1
         id: command_with_exit_1
