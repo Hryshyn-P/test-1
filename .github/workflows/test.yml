@@ -7,64 +7,69 @@ jobs:
   detect-api-changes:
     name: Detect API Changes
     runs-on: ubuntu-latest
-    env:
-      GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    # env:
+    #   GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
+    #   - name: Checkout code
+    #     uses: actions/checkout@v4
 
-      - name: Delete note.txt and main.note.txt if exist
-        run: rm -f note.txt main.note.txt
+    #   - name: Delete note.txt and main.note.txt if exist
+    #     run: rm -f note.txt main.note.txt
 
-      - name: Switch to main branch
-        run: |
-          git fetch origin main
-          git checkout main
+    #   - name: Switch to main branch
+    #     run: |
+    #       git fetch origin main
+    #       git checkout main
 
-      - name: Create main.note.txt with text 'MAIN TEST'
-        run: echo 'MAIN TEST' > main.note.txt
+    #   - name: Create main.note.txt with text 'MAIN TEST'
+    #     run: echo 'MAIN TEST' > main.note.txt
 
-      - name: Upload main.note.txt as artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: main-note
-          path: main.note.txt
+    #   - name: Upload main.note.txt as artifact
+    #     uses: actions/upload-artifact@v4
+    #     with:
+    #       name: main-note
+    #       path: main.note.txt
 
-      - name: Switch back to dev branch
-        run: git checkout -
+    #   - name: Switch back to dev branch
+    #     run: git checkout -
 
-      - name: Create note.txt with text 'TEST'
-        run: echo 'TEST' > note.txt
+    #   - name: Create note.txt with text 'TEST'
+    #     run: echo 'TEST' > note.txt
 
-      - name: Download main.note.txt artifact
-        uses: actions/download-artifact@v4
-        with:
-          name: main-note
-          path: .
+    #   - name: Download main.note.txt artifact
+    #     uses: actions/download-artifact@v4
+    #     with:
+    #       name: main-note
+    #       path: .
 
-      - name: Compare note.txt and main.note.txt
-        run: |
-          if cmp -s "note.txt" "main.note.txt"; then
-            echo "The files are identical"
-          else
-            echo "The files are different"
-          fi
+    #   - name: Compare note.txt and main.note.txt
+    #     run: |
+    #       if cmp -s "note.txt" "main.note.txt"; then
+    #         echo "The files are identical"
+    #       else
+    #         echo "The files are different"
+    #       fi
 
-      - name: Clean Up
-        run: rm -f note.txt main.note.txt
+    # - name: Clean Up
+    #   run: rm -f note.txt main.note.txt
 
       - name: Run command with exit 1
         id: command_with_exit_1
         run: |
           set +e
           text="hello world"
-          res=$(echo "$text" | grep -q "ld" || "www")
-          $res >> $GITHUB_ENV
+          
+          if res=$(echo "$text" | grep -q "ld"); then
+            echo "yes"
+          else
+            echo "no"
+          fi
 
-      - name: Handle exit 1
-        run: |
-          echo ${{ env.res }}
+          
+      # - name: Handle exit 1
+      #   run: |
+      #     echo ${{ env.res }}
 
-      - name: Continue if not crashed
-        run: echo "The script continues..."
+      # - name: Continue if not crashed
+      #   run: echo "The script continues..."
