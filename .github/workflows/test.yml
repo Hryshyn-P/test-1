@@ -58,7 +58,7 @@ jobs:
         id: command_with_exit_1
         run: |
           set +e
-          out=$(exit 1 2>/dev/null)
+          out=$(exit 1)
           echo $out
           
       - name: Handle exit 1
