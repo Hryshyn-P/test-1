@@ -57,9 +57,9 @@ jobs:
       - name: Run command with exit 1
         id: command_with_exit_1
         run: |
-          set +e
-          exit 1
-
+          out=$(exit 1)
+          echo $out
+          
       - name: Handle exit 1
         if: steps.command_with_exit_1.outcome == 'failure'
         run: |
