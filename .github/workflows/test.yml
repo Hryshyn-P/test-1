@@ -59,7 +59,7 @@ jobs:
         run: |
           set +e
           text="hello world"
-          echo "$text" | grep "aaaaaa"
+          echo "$text" | grep "ll"
 
           
       - name: Handle exit 1
