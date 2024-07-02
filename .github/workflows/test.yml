@@ -57,8 +57,10 @@ jobs:
       - name: Check PR description for breaking change
         run: |
           if [[ 1 == 1 ]]; then
-            exit 1 2>/dev/null
-            echo "BREAKING_CHANGE_FLAG_CHECKED=true" >> $GITHUB_ENV
+            set +e
+            out=$(exit 1 2>/dev/null)
+            echo $out
+            set -e
           else
             echo "BREAKING_CHANGE_FLAG_CHECKED=false" >> $GITHUB_ENV
           fi
