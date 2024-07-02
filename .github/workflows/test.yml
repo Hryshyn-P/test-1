@@ -59,14 +59,11 @@ jobs:
         run: |
           set +e
           text="hello world"
-          res=$(echo "$text" | grep -q "ooooo" || "err")
+          echo "res=$(echo "$text" | grep -q "ooooo")" >> $GITHUB_ENV
 
       - name: Handle exit 1
-        if: ${{ steps.command_with_exit_1.outputs.res == "err" }}
         run: |
-          echo "Command exited with code 1."
-          echo "crash=true" >> $GITHUB_ENV
+          echo env.res
 
       - name: Continue if not crashed
-        if: ${{ steps.command_with_exit_1.outputs.res != "err" }}
         run: echo "The script continues..."
