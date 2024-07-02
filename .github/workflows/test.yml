@@ -60,7 +60,7 @@ jobs:
           set +e
           text="hello world"
           
-          if $(echo "$text" | grep -q "ldwww"); then
+          if $(echo "$text" | grep -q "ld"); then
             echo "yes"
           else
             echo "no"
