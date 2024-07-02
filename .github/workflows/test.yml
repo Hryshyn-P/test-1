@@ -58,7 +58,8 @@ jobs:
         id: command_with_exit_1
         run: |
           set +e
-          exit 1
+          text="hello world"
+          echo "$text" | grep "aaaaaa"
 
           
       - name: Handle exit 1
