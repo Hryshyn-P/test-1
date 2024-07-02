@@ -61,15 +61,16 @@ jobs:
           text="hello world"
           
           if $(echo "$text" | grep -q "ld"); then
-            echo "yes"
+            echo "V=true" >> $GITHUB_ENV
           else
-            echo "no"
+            echo "V=false" >> $GITHUB_ENV
           fi
 
           
-      # - name: Handle exit 1
-      #   run: |
-      #     echo ${{ env.res }}
+      - name: Continue if true
+        if: ${{ env.V == 'true' }}
+        run: echo "The script continues..."
 
-      # - name: Continue if not crashed
-      #   run: echo "The script continues..."
+      - name: Continue if false
+        if: ${{ env.V == 'false' }}
+        run: echo "The script continues..."
