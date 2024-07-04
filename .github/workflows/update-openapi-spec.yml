@@ -1,0 +1,21 @@
+name: Upload OpenAPI Spec on Merge to Main
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  update-openapi-spec:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Create a test file
+        run: |
+         echo '{"test_key": "test_value"}' > pr-branch.openapi-spec.json
+
+      - name: Use DevOps action to prepare and upload OpenAPI spec
+        uses: Hryshyn-P/test-2/.github/actions/upload-openapi-spec@main
